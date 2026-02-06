@@ -1,0 +1,21 @@
+{
+  "name": "nova-landing-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "netlify dev",
+    "dev:functions": "netlify functions:serve",
+    "build": "echo 'Static site — nothing to build'",
+    "lint": "node -c netlify/functions/settings.js && node -c netlify/functions/orders.js && node -c netlify/functions/health.js && node -c netlify/functions/identity-signup.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}
