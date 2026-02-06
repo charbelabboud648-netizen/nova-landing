@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Admin — Nova</title>
+  <meta name="description" content="Admin panel (demo). Requires Netlify Identity role: admin." />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+
+:root{
+  --bg:#ffffff;
+  --bg2:#f5f5f7;
+  --text:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#d2d2d7;
+  --accent:#0071e3;
+  --accent2:#0a84ff;
+  --ok:#1fbb64;
+  --shadow:0 20px 60px rgba(0,0,0,.12);
+  --radius:18px;
+  --radius2:14px;
+  --max:1120px;
+  --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px;}
+.hairline{border-bottom:1px solid rgba(0,0,0,.08);}
+:focus-visible{outline:3px solid rgba(0,113,227,.35);outline-offset:3px;border-radius:10px;}
+
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(255,255,255,.78);
+}
+.navInner{
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.2px;}
+.logo{
+  width:22px;height:22px;border-radius:7px;
+  background: radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.95), rgba(255,255,255,0) 55%),
+              linear-gradient(135deg, var(--accent2), #7c3aed);
+  box-shadow:0 10px 24px rgba(0,113,227,.18);
+}
+.navLinks{display:flex;align-items:center;gap:18px;color:rgba(29,29,31,.78);font-size:13px;}
+.navLinks a{padding:8px 10px;border-radius:999px;}
+.navLinks a:hover{background:rgba(0,0,0,.04);}
+.navRight{display:flex;align-items:center;gap:10px;}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(0,0,0,.02);
+  font-size:13px;font-weight:600;color:rgba(29,29,31,.85);
+}
+.pill:hover{background:rgba(0,0,0,.04);}
+.btn{
+  border:0;border-radius:999px;padding:12px 16px;
+  font-weight:600;font-size:14px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  user-select:none;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px);}
+.btnPrimary{background:var(--accent);color:#fff;box-shadow:0 14px 28px rgba(0,113,227,.18);}
+.btnGhost{background:transparent;color:var(--accent);}
+.card{
+  border-radius:var(--radius);
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 16px 44px rgba(0,0,0,.10);
+}
+.section{padding:54px 0;}
+.sectionTitle{text-align:center;margin:0 auto 26px;max-width:72ch;}
+.sectionTitle h2{margin:0 0 10px;font-size:clamp(24px,3vw,34px);letter-spacing:-.7px;}
+.sectionTitle p{margin:0;color:var(--muted);font-size:15px;line-height:1.6;}
+
+.footer{
+  padding:32px 0 24px;
+  color:var(--muted);
+  font-size:12px;line-height:1.6;
+  border-top:1px solid rgba(0,0,0,.06);
+  background:var(--bg2);
+}
+.footerRow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;padding:14px 0 0;
+}
+.footerLinks{display:flex;gap:14px;flex-wrap:wrap;}
+.footerLinks a:hover{text-decoration:underline;}
+
+@media (max-width: 920px){
+  .navLinks{display:none;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto !important}
+  .btn, .pill{transition:none !important}
+  .btn:hover{transform:none !important}
+}
+
+    body{background:var(--bg2);}
+    .page{padding: 22px 0 54px;}
+    .layout{display:grid; grid-template-columns: 1fr; gap: 14px;}
+    .adminCard{padding: 18px;}
+    .adminCard h1{margin:0 0 8px; font-size: 26px; letter-spacing:-.6px;}
+    .adminCard p{margin:0; color:var(--muted); line-height:1.6;}
+    .grid2{margin-top: 14px; display:grid; grid-template-columns: 1fr 1fr; gap: 12px;}
+    @media (max-width: 920px){ .grid2{grid-template-columns:1fr;} }
+    label{display:block; font-size: 12px; font-weight: 700; color: rgba(29,29,31,.80); margin-bottom: 6px;}
+    input, textarea{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: #fff;
+      font-family: var(--font);
+      font-size: 14px;
+    }
+    textarea{min-height: 140px; resize: vertical; line-height:1.5;}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px;}
+    .hint{margin-top: 10px; font-size: 12px; color: var(--muted); line-height: 1.6;}
+    .banner{
+      padding: 12px 14px; border-radius: 14px;
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.8);
+    }
+    .danger{background: rgba(220,38,38,.06); border-color: rgba(220,38,38,.18); color: #7f1d1d;}
+    code{background: rgba(0,0,0,.04); padding: 2px 6px; border-radius: 8px;}
+    ul{margin:8px 0 0; padding-left: 18px;}
+  </style>
+</head>
+<body>
+  <header class="nav hairline" role="navigation" aria-label="Primary">
+    <div class="wrap">
+      <div class="navInner">
+        <div class="brand">
+          <span class="logo" aria-hidden="true"></span>
+          <span id="brandName">Nova</span>
+        </div>
+        <nav class="navLinks" aria-label="Site">
+          <a href="/index.html#features">Features</a>
+          <a href="/index.html#pricing">Pricing</a>
+          <a href="/index.html#support">Support</a>
+        </nav>
+        <div class="navRight">
+          <a class="pill" href="/index.html">Home</a>
+          <a class="pill" href="/signin.html">Account</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap page">
+    <div class="layout">
+      <div class="banner danger" id="gate" style="display:none;">
+        <b>Access denied.</b> This page requires an account with role <code>admin</code>.
+      </div>
+
+      <section class="adminCard card" id="adminPanel" style="display:none;">
+        <h1>Admin</h1>
+        <p>Demo admin panel that edits what shows on the homepage. (For real shared admin control, connect a database + functions.)</p>
+
+        <div class="grid2">
+          <div>
+            <label for="brand">Brand name</label>
+            <input id="brand" placeholder="Nova" />
+          </div>
+          <div>
+            <label for="accent">Accent color (hex)</label>
+            <input id="accent" placeholder="#0071e3" />
+          </div>
+
+          <div style="grid-column: 1 / -1;">
+            <label for="kicker">Kicker line</label>
+            <input id="kicker" placeholder="A clean, Apple-inspired layout • single plan • static demo" />
+          </div>
+
+          <div style="grid-column: 1 / -1;">
+            <label for="headline">Headline (use \n for line break)</label>
+            <input id="headline" placeholder="Premium membership.\nSimple to buy." />
+          </div>
+
+          <div style="grid-column: 1 / -1;">
+            <label for="subhead">Subhead</label>
+            <textarea id="subhead" placeholder="Short description..."></textarea>
+          </div>
+
+          <div>
+            <label for="planName">Plan name</label>
+            <input id="planName" placeholder="Premium Membership" />
+          </div>
+          <div>
+            <label for="planMeta">Plan meta</label>
+            <input id="planMeta" placeholder="Monthly • Instant access" />
+          </div>
+
+          <div>
+            <label for="price">Price</label>
+            <input id="price" placeholder="9.99" />
+          </div>
+          <div>
+            <label for="perText">Per text</label>
+            <input id="perText" placeholder="per month" />
+          </div>
+
+          <div style="grid-column: 1 / -1;">
+            <label for="features">Features (one per line)</label>
+            <textarea id="features" placeholder="Feature 1\nFeature 2\nFeature 3"></textarea>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btnPrimary" type="button" onclick="save()">Save changes</button>
+          <button class="btn" style="background: rgba(0,0,0,.04); border: 1px solid rgba(0,0,0,.08);" type="button" onclick="resetDefaults()">Reset defaults</button>
+          <button class="btn btnGhost" type="button" onclick="signOut()">Sign out</button>
+        </div>
+
+        <div class="hint" id="status"></div>
+        <div class="hint">
+          Notes:
+          <ul>
+            <li>This demo stores settings in <code>localStorage</code> (per-browser).</li>
+            <li>For real admin control across all users, use a database + Netlify Functions and restrict writes to admin role.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div style="padding: 14px 0 0; color: var(--muted);">
+        © <span id="year"></span> <span id="footerBrand">Nova</span>. Demo template.
+      </div>
+      <div class="footerRow">
+        <div>Admin is role-gated via Netlify Identity.</div>
+        <div class="footerLinks">
+          <a href="/index.html#features">Features</a>
+          <a href="/index.html#pricing">Pricing</a>
+          <a href="/index.html#support">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const DEFAULT_SETTINGS = {
+      brand: "Nova",
+      accent: "#0071e3",
+      accent2: "#0a84ff",
+      kicker: "A clean, Apple-inspired layout • single plan • static demo",
+      headline: "Premium membership.\nSimple to buy.",
+      subhead: "A polished landing page that feels like a real product site on iOS, Android, and PC. Replace the brand name and copy for your legitimate product.",
+      planName: "Premium Membership",
+      planMeta: "Monthly • Instant access",
+      planTag: "Most popular",
+      perText: "per month",
+      price: 9.99,
+      features: [
+        "Instant activation (connect your delivery flow later).",
+        "Premium features (customize for your product).",
+        "Priority support (add WhatsApp/email links).",
+        "Netlify-ready static site (drop and publish)."
+      ]
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const status = $("status");
+
+    async function fetchRemoteSettings(){
+      try{
+        const res = await fetch("/api/settings", { headers: { "accept": "application/json" } });
+        if(!res.ok) return null;
+        return await res.json();
+      }catch(e){
+        return null;
+      }
+    }
+
+    async function getJwt(){
+      if(!window.netlifyIdentity) return null;
+      const u = netlifyIdentity.currentUser();
+      if(!u) return null;
+      try{ return await u.jwt(); }
+      catch(e){ return (u.token && u.token.access_token) || null; }
+    }
+
+    async function load(){
+      // Prefer site-wide settings from the backend.
+      const remote = await fetchRemoteSettings();
+      if(remote) return Object.assign({}, DEFAULT_SETTINGS, remote);
+
+      // Fallback: local (per-browser) settings.
+      try{
+        const raw = localStorage.getItem("nova_settings");
+        if(!raw) return DEFAULT_SETTINGS;
+        const parsed = JSON.parse(raw);
+        return Object.assign({}, DEFAULT_SETTINGS, parsed);
+      }catch(e){
+        return DEFAULT_SETTINGS;
+      }
+    }
+
+    function fillForm(s){
+      $("brand").value = s.brand || "";
+      $("accent").value = s.accent || "";
+      $("kicker").value = s.kicker || "";
+      $("headline").value = s.headline || "";
+      $("subhead").value = s.subhead || "";
+      $("planName").value = s.planName || "";
+      $("planMeta").value = s.planMeta || "";
+      $("price").value = String(s.price ?? "");
+      $("perText").value = s.perText || "";
+      $("features").value = (s.features || []).join("\n");
+      $("brandName").textContent = s.brand || "Nova";
+      $("footerBrand").textContent = s.brand || "Nova";
+      document.documentElement.style.setProperty("--accent", s.accent || DEFAULT_SETTINGS.accent);
+      document.documentElement.style.setProperty("--accent2", s.accent2 || DEFAULT_SETTINGS.accent2);
+    }
+
+    async function save(){
+      const s = {
+        brand: $("brand").value.trim() || DEFAULT_SETTINGS.brand,
+        accent: $("accent").value.trim() || DEFAULT_SETTINGS.accent,
+        kicker: $("kicker").value.trim() || DEFAULT_SETTINGS.kicker,
+        headline: $("headline").value.trim() || DEFAULT_SETTINGS.headline,
+        subhead: $("subhead").value.trim() || DEFAULT_SETTINGS.subhead,
+        planName: $("planName").value.trim() || DEFAULT_SETTINGS.planName,
+        planMeta: $("planMeta").value.trim() || DEFAULT_SETTINGS.planMeta,
+        perText: $("perText").value.trim() || DEFAULT_SETTINGS.perText,
+        price: (Number.isFinite(Number($("price").value)) ? Number($("price").value) : DEFAULT_SETTINGS.price),
+        features: $("features").value.split("\n").map(x => x.trim()).filter(Boolean)
+      };
+
+      // Always keep a local copy too (handy in case the backend isn't available).
+      localStorage.setItem("nova_settings", JSON.stringify(s));
+
+      // Persist server-side for all visitors (admin-only).
+      const jwt = await getJwt();
+      if(jwt){
+        try{
+          const res = await fetch("/api/settings", {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              "authorization": "Bearer " + jwt
+            },
+            body: JSON.stringify(s)
+          });
+          if(res.ok){
+            const saved = await res.json();
+            status.textContent = "Saved to backend. Open the homepage to see updates.";
+            fillForm(Object.assign({}, DEFAULT_SETTINGS, saved));
+            return;
+          }
+          status.textContent = "Saved locally, but backend save failed (" + res.status + ").";
+          fillForm(s);
+          return;
+        }catch(e){
+          // fallthrough
+        }
+      }
+
+      status.textContent = "Saved locally. (Backend not available.)";
+      fillForm(s);
+    }
+
+    async function resetDefaults(){
+      localStorage.removeItem("nova_settings");
+
+      // Reset backend settings to defaults (admin-only).
+      const jwt = await getJwt();
+      if(jwt){
+        try{
+          const res = await fetch("/api/settings", {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+              "authorization": "Bearer " + jwt
+            },
+            body: JSON.stringify(DEFAULT_SETTINGS)
+          });
+          if(res.ok){
+            const saved = await res.json();
+            fillForm(Object.assign({}, DEFAULT_SETTINGS, saved));
+            status.textContent = "Reset to defaults (backend).";
+            return;
+          }
+        }catch(e){ /* ignore */ }
+      }
+
+      const s = await load();
+      fillForm(s);
+      status.textContent = "Reset to defaults (local only).";
+    }
+
+    function signOut(){
+      if(window.netlifyIdentity) netlifyIdentity.logout();
+      window.location.href = "/index.html";
+    }
+
+    async function gate(){
+      const gateEl = $("gate");
+      const panel = $("adminPanel");
+
+      if(!window.netlifyIdentity){
+        gateEl.style.display = "block";
+        gateEl.innerHTML = "<b>Identity not enabled.</b> Deploy on Netlify and enable Identity to use admin.";
+        panel.style.display = "none";
+        return;
+      }
+
+      const user = netlifyIdentity.currentUser();
+      if(!user){
+        window.location.href = "/signin.html";
+        return;
+      }
+
+      let roles = [];
+      try{ roles = (user.app_metadata && user.app_metadata.roles) || []; }catch(e){}
+
+      if(!roles.includes("admin")){
+        gateEl.style.display = "block";
+        panel.style.display = "none";
+        return;
+      }
+
+      gateEl.style.display = "none";
+      panel.style.display = "block";
+      fillForm(await load());
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    if(window.netlifyIdentity){
+      netlifyIdentity.on("init", gate);
+      netlifyIdentity.on("login", gate);
+      netlifyIdentity.on("logout", gate);
+      netlifyIdentity.init();
+    }else{
+      gate();
+    }
+  </script>
+</body>
+</html>

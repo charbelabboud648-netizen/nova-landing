@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Nova — Premium Membership</title>
+  <meta name="description" content="Apple-inspired landing page + single plan. Netlify-ready." />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+
+:root{
+  --bg:#ffffff;
+  --bg2:#f5f5f7;
+  --text:#1d1d1f;
+  --muted:#6e6e73;
+  --line:#d2d2d7;
+  --accent:#0071e3;
+  --accent2:#0a84ff;
+  --ok:#1fbb64;
+  --shadow:0 20px 60px rgba(0,0,0,.12);
+  --radius:18px;
+  --radius2:14px;
+  --max:1120px;
+  --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 18px;}
+.hairline{border-bottom:1px solid rgba(0,0,0,.08);}
+:focus-visible{outline:3px solid rgba(0,113,227,.35);outline-offset:3px;border-radius:10px;}
+
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  background:rgba(255,255,255,.78);
+}
+.navInner{
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.2px;}
+.logo{
+  width:22px;height:22px;border-radius:7px;
+  background: radial-gradient(120% 120% at 30% 20%, rgba(255,255,255,.95), rgba(255,255,255,0) 55%),
+              linear-gradient(135deg, var(--accent2), #7c3aed);
+  box-shadow:0 10px 24px rgba(0,113,227,.18);
+}
+.navLinks{display:flex;align-items:center;gap:18px;color:rgba(29,29,31,.78);font-size:13px;}
+.navLinks a{padding:8px 10px;border-radius:999px;}
+.navLinks a:hover{background:rgba(0,0,0,.04);}
+.navRight{display:flex;align-items:center;gap:10px;}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  border:1px solid rgba(0,0,0,.08);
+  background:rgba(0,0,0,.02);
+  font-size:13px;font-weight:600;color:rgba(29,29,31,.85);
+}
+.pill:hover{background:rgba(0,0,0,.04);}
+.btn{
+  border:0;border-radius:999px;padding:12px 16px;
+  font-weight:600;font-size:14px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+  user-select:none;white-space:nowrap;
+}
+.btn:hover{transform:translateY(-1px);}
+.btnPrimary{background:var(--accent);color:#fff;box-shadow:0 14px 28px rgba(0,113,227,.18);}
+.btnGhost{background:transparent;color:var(--accent);}
+.card{
+  border-radius:var(--radius);
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 16px 44px rgba(0,0,0,.10);
+}
+.section{padding:54px 0;}
+.sectionTitle{text-align:center;margin:0 auto 26px;max-width:72ch;}
+.sectionTitle h2{margin:0 0 10px;font-size:clamp(24px,3vw,34px);letter-spacing:-.7px;}
+.sectionTitle p{margin:0;color:var(--muted);font-size:15px;line-height:1.6;}
+
+.footer{
+  padding:32px 0 24px;
+  color:var(--muted);
+  font-size:12px;line-height:1.6;
+  border-top:1px solid rgba(0,0,0,.06);
+  background:var(--bg2);
+}
+.footerRow{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-wrap:wrap;padding:14px 0 0;
+}
+.footerLinks{display:flex;gap:14px;flex-wrap:wrap;}
+.footerLinks a:hover{text-decoration:underline;}
+
+@media (max-width: 920px){
+  .navLinks{display:none;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{scroll-behavior:auto !important}
+  .btn, .pill{transition:none !important}
+  .btn:hover{transform:none !important}
+}
+
+  /* Page-specific */
+  .hero{background:var(--bg2);border-bottom:1px solid rgba(0,0,0,.06);}
+  .heroInner{
+    padding: clamp(34px, 6vw, 70px) 0;
+    display:grid;grid-template-columns: 1.15fr .85fr;
+    gap: clamp(18px, 4vw, 48px);align-items:center;
+  }
+  @media (max-width: 920px){ .heroInner{grid-template-columns:1fr;text-align:center;} }
+  .kicker{
+    display:inline-flex;align-items:center;gap:8px;color:var(--muted);
+    font-size:13px;background:rgba(0,0,0,.04);
+    border:1px solid rgba(0,0,0,.06);padding:8px 12px;border-radius:999px;
+    width:fit-content;
+  }
+  @media (max-width: 920px){ .kicker{margin:0 auto;} }
+  h1{margin:14px 0 10px;font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-1.2px;}
+  .sub{margin:0;color:var(--muted);font-size:17px;line-height:1.55;max-width:58ch;}
+  @media (max-width: 920px){ .sub{margin:0 auto;} }
+  .ctaRow{margin-top:18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  @media (max-width: 920px){ .ctaRow{justify-content:center;} }
+  .linkArrow{font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;}
+  .linkArrow:hover{text-decoration:underline;}
+  .arrow{display:inline-block;transform:translateY(1px);}
+
+  .visual{
+    border-radius:26px;height: clamp(260px, 38vw, 420px);
+    background:
+      radial-gradient(120% 90% at 70% 20%, rgba(0,113,227,.22), transparent 60%),
+      radial-gradient(90% 70% at 25% 15%, rgba(124,58,237,.18), transparent 55%),
+      linear-gradient(180deg, #ffffff, #f1f1f4);
+    border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  .device{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:min(320px, 82%);aspect-ratio:10/16;border-radius:26px;
+    background:linear-gradient(180deg, rgba(29,29,31,.92), rgba(29,29,31,.80));
+    box-shadow:0 30px 80px rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.14);
+  }
+  .device:before{
+    content:"";position:absolute;inset:10px;border-radius:20px;
+    background:
+      radial-gradient(120% 90% at 20% 0%, rgba(255,255,255,.16), transparent 60%),
+      radial-gradient(90% 60% at 80% 20%, rgba(0,113,227,.24), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .deviceUI{position:absolute;inset:18px;border-radius:18px;display:grid;align-content:start;gap:10px;padding:16px;color:rgba(255,255,255,.90);}
+  .uiBar{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.75);}
+  .uiCard{margin-top:8px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.10);padding:14px;}
+  .uiCard b{display:block;font-size:13px;}
+  .uiCard span{display:block;margin-top:4px;color:rgba(255,255,255,.70);font-size:12px;line-height:1.45;}
+  .uiBtn{margin-top:12px;border-radius:999px;background:rgba(0,113,227,.95);border:1px solid rgba(255,255,255,.18);padding:10px 12px;font-weight:600;font-size:12px;width:fit-content;}
+
+  .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+  @media (max-width: 920px){ .tiles{grid-template-columns:1fr;} }
+  .tile{border-radius:var(--radius);background:#fff;border:1px solid rgba(0,0,0,.07);padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.08);}
+  .tileTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;}
+  .tileIcon{width:34px;height:34px;border-radius:12px;background:rgba(0,113,227,.10);display:grid;place-items:center;color:var(--accent);font-weight:700;}
+  .tile h3{margin:0;font-size:16px;letter-spacing:-.2px;}
+  .tile p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.55;}
+
+  .pricingWrap{display:grid;grid-template-columns:1.05fr .95fr;gap:14px;align-items:start;}
+  @media (max-width: 920px){ .pricingWrap{grid-template-columns:1fr;} }
+
+  .pricingLeft{border-radius:var(--radius);background:var(--bg2);border:1px solid rgba(0,0,0,.06);padding:22px;}
+  .pricingLeft h3{margin:0;font-size:18px;letter-spacing:-.2px;}
+  .checklist{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px;}
+  .checklist li{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:14px;line-height:1.55;}
+  .check{width:22px;height:22px;border-radius:999px;background:rgba(31,187,100,.14);border:1px solid rgba(31,187,100,.22);display:grid;place-items:center;color:#0d6b3a;font-weight:800;flex:0 0 auto;}
+
+  .plan{border-radius:var(--radius);background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:var(--shadow);padding:18px;position:sticky;top:86px;}
+  @media (max-width: 920px){ .plan{position:relative;top:auto;} }
+  .planHead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(0,113,227,.08);color:var(--accent);border:1px solid rgba(0,113,227,.16);font-size:12px;font-weight:600;width:fit-content;}
+  .planName{font-weight:700;letter-spacing:-.2px;font-size:16px;margin:0;}
+  .planMeta{margin-top:6px;color:var(--muted);font-size:13px;}
+  .price{font-weight:800;font-size:28px;letter-spacing:-.6px;margin:0;}
+  .per{color:var(--muted);font-size:13px;margin-top:4px;text-align:right;}
+  .hr{height:1px;background:rgba(0,0,0,.08);margin:14px 0;}
+  .row{display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .row small{color:var(--muted);font-size:12px;}
+  .row strong{font-size:16px;letter-spacing:-.2px;}
+
+  .qty{display:flex;align-items:center;gap:8px;border:1px solid rgba(0,0,0,.10);border-radius:999px;padding:6px;background:#fff;}
+  .qty button{width:36px;height:36px;border-radius:999px;border:1px solid rgba(0,0,0,.10);background:rgba(0,0,0,.02);cursor:pointer;font-size:18px;font-weight:700;color:var(--text);}
+  .qty span{min-width:28px;text-align:center;font-weight:700;color:var(--text);}
+
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.86);
+    backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+    border-top:1px solid rgba(0,0,0,.08);padding:10px 14px;display:none;z-index:60;
+  }
+  .barInner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .bar strong{font-size:15px;}
+  .bar small{display:block;color:var(--muted);font-size:12px;}
+  @media (max-width: 920px){ .bar{display:block;} .wrap{padding-bottom:120px;} }
+  </style>
+</head>
+
+<body>
+  <header class="nav hairline" role="navigation" aria-label="Primary">
+    <div class="wrap">
+      <div class="navInner">
+        <div class="brand">
+          <span class="logo" aria-hidden="true"></span>
+          <span id="brandName">Nova</span>
+        </div>
+
+        <nav class="navLinks" aria-label="Site">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#support">Support</a>
+        </nav>
+
+        <div class="navRight">
+          <a class="pill" id="adminLink" href="/admin.html" style="display:none;">Admin</a>
+          <a class="pill" id="accountBtn" href="/signin.html">Sign in</a>
+          <a class="btn btnPrimary" href="#pricing" style="padding:10px 14px;">Buy</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="heroInner">
+          <div>
+            <div class="kicker" id="kickerText">A clean, Apple-inspired layout • single plan • static demo</div>
+            <h1 id="headline">Premium membership.<br/>Simple to buy.</h1>
+            <p class="sub" id="subhead">
+              A polished landing page that feels like a real product site on iOS, Android, and PC.
+              Replace the brand name and copy for your legitimate product.
+            </p>
+
+            <div class="ctaRow">
+              <a class="btn btnPrimary" href="#pricing" id="ctaPrimary">Buy now</a>
+              <a class="linkArrow" href="#features" id="ctaSecondary">Learn more <span class="arrow">›</span></a>
+            </div>
+          </div>
+
+          <div class="visual" aria-hidden="true">
+            <div class="device">
+              <div class="deviceUI">
+                <div class="uiBar"><span id="uiBrand">Nova</span><span>•••</span></div>
+                <div class="uiCard">
+                  <b id="uiPlan">Premium</b>
+                  <span id="uiCopy">Instant access. One plan. Clean checkout.</span>
+                  <div class="uiBtn">Buy now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <section id="features" class="section">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Designed to feel effortless.</h2>
+          <p>Minimal typography, generous spacing, and a checkout that stays out of the way.</p>
+        </div>
+
+        <div class="tiles">
+          <div class="tile">
+            <div class="tileTop"><h3>Clean hierarchy</h3><div class="tileIcon">A</div></div>
+            <p>Headlines and spacing that look natural on small screens and large desktops.</p>
+          </div>
+          <div class="tile">
+            <div class="tileTop"><h3>Responsive by default</h3><div class="tileIcon">R</div></div>
+            <p>Layouts stack smoothly on iOS/Android, while staying roomy on PC.</p>
+          </div>
+          <div class="tile">
+            <div class="tileTop"><h3>Simple checkout</h3><div class="tileIcon">✓</div></div>
+            <p>One plan, quantity control, total calculation, and a clear call to action.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="section" style="background: var(--bg2); border-top:1px solid rgba(0,0,0,.06); border-bottom:1px solid rgba(0,0,0,.06);">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>One plan. One price.</h2>
+          <p>Keep it simple. People buy faster when there’s less to think about.</p>
+        </div>
+
+        <div class="pricingWrap">
+          <div class="pricingLeft">
+            <h3>What you get</h3>
+            <ul class="checklist" id="featuresList"></ul>
+          </div>
+
+          <aside class="plan" aria-label="Plan">
+            <div class="planHead">
+              <div>
+                <div class="tag" id="planTag">Most popular</div>
+                <p class="planName" id="planName">Premium Membership</p>
+                <div class="planMeta" id="planMeta">Monthly • Instant access</div>
+              </div>
+              <div style="text-align:right">
+                <p class="price" id="price">$9.99</p>
+                <div class="per" id="perText">per month</div>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="row" style="align-items:flex-end;">
+              <div>
+                <small>Total</small><br/>
+                <strong id="total">$0.00</strong>
+              </div>
+              <div style="text-align:right">
+                <small>Quantity</small><br/>
+                <div class="qty" role="group" aria-label="Quantity selector">
+                  <button type="button" aria-label="Decrease quantity" onclick="dec()">−</button>
+                  <span id="qty">1</span>
+                  <button type="button" aria-label="Increase quantity" onclick="inc()">+</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btnPrimary" style="margin-top:12px;width:100%;" type="button" onclick="addToCart()" id="addBtn">Add to cart</button>
+            <button class="btn" style="margin-top:10px;width:100%; background: rgba(0,0,0,.04); border: 1px solid rgba(0,0,0,.08);" type="button" onclick="checkout()">
+              Checkout (demo)
+            </button>
+
+            <div style="margin-top:10px;color:var(--muted);font-size:12px;line-height:1.6;">
+              Demo UI only (no real payments). Use for legitimate products and connect a payment provider later.
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="support" class="section">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2>Support that’s easy to find.</h2>
+          <p>Add your support links here (WhatsApp, email, helpdesk). Keep it simple and visible.</p>
+        </div>
+        <div class="tiles" style="grid-template-columns:1fr 1fr;">
+          <div class="tile">
+            <h3 style="margin:0">Contact</h3>
+            <p style="margin-top:8px">Replace with: WhatsApp link / Email / Live chat button.</p>
+          </div>
+          <div class="tile">
+            <h3 style="margin:0">Refund policy</h3>
+            <p style="margin-top:8px">Replace with your real refund and cancellation terms.</p>
+          </div>
+        </div>
+        <style>@media (max-width: 920px){ #support .tiles{grid-template-columns:1fr !important;} }</style>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div style="padding: 14px 0 0; color: var(--muted);">
+        © <span id="year"></span> <span id="footerBrand">Nova</span>. Demo template.
+      </div>
+      <div class="footerRow">
+        <div>Built as a static page for fast hosting.</div>
+        <div class="footerLinks">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#support">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="bar" aria-live="polite">
+    <div class="barInner">
+      <div>
+        <small>Total</small>
+        <strong id="mTotal">$0.00</strong>
+      </div>
+      <button class="btn btnPrimary" type="button" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    // ----- Demo site settings (stored locally for prototype) -----
+    const DEFAULT_SETTINGS = {
+      brand: "Nova",
+      accent: "#0071e3",
+      accent2: "#0a84ff",
+      kicker: "A clean, Apple-inspired layout • single plan • static demo",
+      headline: "Premium membership.\nSimple to buy.",
+      subhead: "A polished landing page that feels like a real product site on iOS, Android, and PC. Replace the brand name and copy for your legitimate product.",
+      planName: "Premium Membership",
+      planMeta: "Monthly • Instant access",
+      planTag: "Most popular",
+      perText: "per month",
+      price: 9.99,
+      features: [
+        "Instant activation (connect your delivery flow later).",
+        "Premium features (customize for your product).",
+        "Priority support (add WhatsApp/email links).",
+        "Netlify-ready static site (drop and publish)."
+      ]
+    };
+
+    function escapeHtml(str){
+      return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
+    }
+
+    // Local-only settings (used as a fallback when the backend isn't available)
+    function loadLocalSettings(){
+      try{
+        const raw = localStorage.getItem("nova_settings");
+        if(!raw) return DEFAULT_SETTINGS;
+        const parsed = JSON.parse(raw);
+        return Object.assign({}, DEFAULT_SETTINGS, parsed);
+      }catch(e){
+        return DEFAULT_SETTINGS;
+      }
+    }
+
+    // Site-wide settings (persisted server-side).
+    // If the backend isn't deployed, this quietly falls back to localStorage.
+    async function fetchRemoteSettings(){
+      try{
+        const res = await fetch("/api/settings", { headers: { "accept": "application/json" } });
+        if(!res.ok) return null;
+        const data = await res.json();
+        return data;
+      }catch(e){
+        return null;
+      }
+    }
+
+    function applySettings(s){
+      document.documentElement.style.setProperty("--accent", s.accent || DEFAULT_SETTINGS.accent);
+      document.documentElement.style.setProperty("--accent2", s.accent2 || DEFAULT_SETTINGS.accent2);
+
+      ["brandName","uiBrand","footerBrand"].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.textContent = s.brand || "Nova";
+      });
+
+      document.getElementById("kickerText").textContent = s.kicker || DEFAULT_SETTINGS.kicker;
+
+      // Avoid innerHTML here (keeps things safe if settings come from the backend)
+      const headlineEl = document.getElementById("headline");
+      const headlineLines = String(s.headline || DEFAULT_SETTINGS.headline).split("\n");
+      headlineEl.textContent = "";
+      headlineLines.forEach((line, i) => {
+        if(i > 0) headlineEl.appendChild(document.createElement("br"));
+        headlineEl.appendChild(document.createTextNode(line));
+      });
+
+      document.getElementById("subhead").textContent = s.subhead || DEFAULT_SETTINGS.subhead;
+      document.getElementById("planName").textContent = s.planName || DEFAULT_SETTINGS.planName;
+      document.getElementById("planMeta").textContent = s.planMeta || DEFAULT_SETTINGS.planMeta;
+      document.getElementById("planTag").textContent = s.planTag || DEFAULT_SETTINGS.planTag;
+      document.getElementById("perText").textContent = s.perText || DEFAULT_SETTINGS.perText;
+
+      unit = Number((s.price ?? DEFAULT_SETTINGS.price));
+      document.getElementById("price").textContent = "$" + unit.toFixed(2);
+
+      document.getElementById("uiPlan").textContent = (s.planName || DEFAULT_SETTINGS.planName).split(" ")[0] || "Premium";
+
+      const ul = document.getElementById("featuresList");
+      ul.innerHTML = "";
+      (s.features || DEFAULT_SETTINGS.features).forEach(t => {
+        const li = document.createElement("li");
+        li.innerHTML = '<span class="check">✓</span><span>' + escapeHtml(t) + '</span>';
+        ul.appendChild(li);
+      });
+    }
+
+    // ----- Cart logic -----
+    let unit = DEFAULT_SETTINGS.price;
+    let qty = 1;
+    let total = 0;
+
+    function inc(){ qty = Math.min(9, qty + 1); document.getElementById("qty").textContent = String(qty); }
+    function dec(){ qty = Math.max(1, qty - 1); document.getElementById("qty").textContent = String(qty); }
+
+    function setTotal(v){
+      total = v;
+      const t = "$" + total.toFixed(2);
+      document.getElementById("total").textContent = t;
+      document.getElementById("mTotal").textContent = t;
+    }
+
+    function requireLogin(){
+      if(!window.netlifyIdentity) return false; // demo mode if not deployed with Identity enabled
+      const user = netlifyIdentity.currentUser();
+      if(user) return false;
+      window.location.href = "/signin.html";
+      return true;
+    }
+
+    async function getJwt(){
+      if(!window.netlifyIdentity) return null;
+      const u = netlifyIdentity.currentUser();
+      if(!u) return null;
+      try{
+        // gotrue-js provides a fresh JWT via user.jwt()
+        return await u.jwt();
+      }catch(e){
+        // Fallback (older widget versions)
+        return (u.token && u.token.access_token) || null;
+      }
+    }
+
+    function addToCart(){
+      if(requireLogin()) return;
+      setTotal(unit * qty);
+      const btn = document.getElementById("addBtn");
+      btn.textContent = "Added";
+      setTimeout(()=>{ btn.textContent = "Add to cart"; }, 900);
+    }
+
+    async function checkout(){
+      if(requireLogin()) return;
+      if(total === 0){ alert("Add the plan to your cart first."); return; }
+
+      // Demo backend: creates an order record (no real payments)
+      if(window.netlifyIdentity){
+        const jwt = await getJwt();
+        if(jwt){
+          try{
+            const res = await fetch("/api/orders", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                "authorization": "Bearer " + jwt
+              },
+              body: JSON.stringify({ qty })
+            });
+            if(res.ok){
+              const data = await res.json();
+              alert("Demo checkout created order " + data.id + " (total " + data.totalFormatted + ").");
+              return;
+            }
+          }catch(e){ /* fallthrough */ }
+        }
+      }
+
+      alert("Demo checkout — connect your payment + fulfillment flow here.");
+    }
+
+    // ----- Identity UI -----
+    function updateAuthUI(){
+      const accountBtn = document.getElementById("accountBtn");
+      const adminLink = document.getElementById("adminLink");
+
+      if(!window.netlifyIdentity){
+        accountBtn.textContent = "Sign in";
+        accountBtn.href = "/signin.html";
+        adminLink.style.display = "none";
+        return;
+      }
+
+      const user = netlifyIdentity.currentUser();
+      if(!user){
+        accountBtn.textContent = "Sign in";
+        accountBtn.href = "/signin.html";
+        adminLink.style.display = "none";
+        return;
+      }
+
+      accountBtn.textContent = "Account";
+      accountBtn.href = "/signin.html";
+
+      // Role-gate the admin link (requires app_metadata.roles includes 'admin')
+      try{
+        const roles = (user.app_metadata && user.app_metadata.roles) || [];
+        adminLink.style.display = roles.includes("admin") ? "inline-flex" : "none";
+      }catch(e){
+        adminLink.style.display = "none";
+      }
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Apply settings on load (fast local), then hydrate with server settings if available.
+    applySettings(loadLocalSettings());
+    fetchRemoteSettings().then((remote) => {
+      if(remote) applySettings(remote);
+    });
+
+    if(window.netlifyIdentity){
+      netlifyIdentity.on("init", updateAuthUI);
+      netlifyIdentity.on("login", updateAuthUI);
+      netlifyIdentity.on("logout", updateAuthUI);
+      netlifyIdentity.init();
+    }else{
+      updateAuthUI();
+    }
+  </script>
+</body>
+</html>

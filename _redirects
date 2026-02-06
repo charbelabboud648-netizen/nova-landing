@@ -1,0 +1,6 @@
+/   /index.html   200
+/signin   /signin.html  200
+/admin    /admin.html   200
+
+# API -> Netlify Functions
+/api/*  /.netlify/functions/:splat  200
